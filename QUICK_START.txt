@@ -1,0 +1,83 @@
+📱 AGRI EXPERT FLUTTER APP - QUICK START GUIDE
+
+=== PREREQUISITES ===
+✓ Flutter SDK installed (https://flutter.dev)
+✓ Android Studio or Xcode (for emulator/simulator)
+✓ Google account (for Firebase)
+
+=== 5-MINUTE SETUP ===
+
+1. Install Dependencies
+   cd c:\Users\anushka\Agri_Expert\mobile
+   flutter pub get
+
+2. Create Firebase Project
+   - Go to https://console.firebase.google.com
+   - Click "Add Project" → Name: "agri-expert"
+   - Skip Analytics
+
+3. Enable Phone Authentication
+   - In Firebase Console: Authentication → Sign-in method → Phone → Enable
+   - Add test phone numbers for testing
+
+4. Connect Firebase to App (AUTO-CONFIGURE)
+   flutter pub global activate flutterfire_cli
+   flutterfire configure
+   
+   Select:
+   - Project: "agri-expert"
+   - Platforms: Android & iOS (or your target)
+
+5. Run the App
+   On Android:
+     flutter emulators --launch <emulator_name>
+     flutter run
+   
+   On iOS:
+     open -a Simulator
+     flutter run
+
+=== FEATURES IMPLEMENTED ===
+✓ Phone number login with OTP (Firebase Auth)
+✓ Dashboard after login
+✓ Location permission (GPS)
+✓ Soil parameter input form
+✓ Firestore data storage
+✓ User profile management
+
+=== TEST THE LOGIN ===
+1. Enter: 9876543210 (or any test number)
+2. Click "Send OTP"
+3. In Firebase Console, you'll see the OTP request
+4. Copy the OTP and paste into the app
+5. Verify → You're logged in!
+
+=== NEXT INTEGRATION STEPS ===
+[ ] Integrate OpenWeatherMap API (weather data)
+[ ] Connect to FastAPI backend (crop recommendations)
+[ ] Add prediction history view
+[ ] Implement location auto-fetch
+[ ] Add crop advisory details
+
+=== TROUBLESHOOTING ===
+Issue: "MissingPluginException"
+Fix: flutter clean && flutter pub get && flutter run
+
+Issue: "Firebase not initialized"
+Fix: Run "flutterfire configure" again and check firebase_options.dart
+
+Issue: "Phone number format error"
+Fix: Enter 10 digits only (no country code, will auto-add +91)
+
+=== KEY FILES ===
+lib/main.dart → App UI, Auth screens, Navigation
+lib/services/firebase_service.dart → Firebase methods
+lib/firebase_options.dart → Firebase credentials (auto-generated)
+pubspec.yaml → Dependencies
+
+=== FIREBASE CONSOLE LINKS ===
+Auth: https://console.firebase.google.com → Authentication
+Firestore: https://console.firebase.google.com → Firestore Database
+Settings: https://console.firebase.google.com → Project Settings
+
+Good luck! 🚀
