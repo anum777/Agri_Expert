@@ -28,7 +28,8 @@ class FirebaseService {
     }
   }
 
-  Future<UserCredential?> signInWithOTP(String verificationId, String otp) async {
+  Future<UserCredential?> signInWithOTP(
+      String verificationId, String otp) async {
     try {
       PhoneAuthCredential credential = PhoneAuthProvider.credential(
         verificationId: verificationId,
@@ -36,8 +37,8 @@ class FirebaseService {
       );
       UserCredential result = await _auth.signInWithCredential(credential);
       return result;
-    } on FirebaseAuthException catch (e) {
-      print('OTP SignIn Error: ${e.message}');
+    } catch (e) {
+      print('Error signing in with OTP: $e');
       return null;
     }
   }
@@ -66,14 +67,6 @@ class FirebaseService {
     } on FirebaseAuthException catch (e) {
       print('SignIn Error: ${e.message}');
       return null;
-    }
-  }
-
-  Future<void> signOut() async {
-    try {
-      await _auth.signOut();
-    } catch (e) {
-      print('SignOut Error: $e');
     }
   }
 
@@ -132,11 +125,23 @@ class FirebaseService {
       User? user = getCurrentUser();
       if (user == null) return false;
 
-      await _firestore.collection('users').doc(user.uid).set(profile, SetOptions(merge: true));
+      await _firestore
+          .collection('users')
+          .doc(user.uid)
+          .set(profile, SetOptions(merge: true));
       return true;
     } catch (e) {
       print('Save Profile Error: $e');
       return false;
+    }
+  }
+
+  // Sign out the current user
+  Future<void> signOut() async {
+    try {
+      await _auth.signOut();
+    } catch (e) {
+      print('Sign Out Error: $e');
     }
   }
 }
